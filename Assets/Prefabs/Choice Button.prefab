@@ -146,8 +146,9 @@ GameObject:
   - component: {fileID: 8383133621422992704}
   - component: {fileID: 2174980496622372755}
   - component: {fileID: 3818151858168070160}
+  - component: {fileID: 1454727317534635100}
   m_Layer: 5
-  m_Name: Letter Choice
+  m_Name: Choice Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,4 +255,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2174980496622372755}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1454727317534635100}
+        m_TargetAssemblyTypeName: ChoiceButton, Assembly-CSharp
+        m_MethodName: MakeChoice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1454727317534635100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344511175963302636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43999e3b4ba399a4b83a3c0da9e0bba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matchHandler: {fileID: 0}
