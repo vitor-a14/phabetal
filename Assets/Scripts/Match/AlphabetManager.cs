@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 // Handle the alphabet and letter order logic
 public class AlphabetManager {
@@ -12,10 +13,12 @@ public class AlphabetManager {
         return a > b;
     }
 
-    public static string GetRandomLetter() {
-        Random random = new Random();
-        int randomIndex = random.Next(0, alphabet.Length - 1);
+    public static string GetRandomLetter(char[] avoidedLetters) {
+        char[] searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter)).ToArray();
 
-        return alphabet[randomIndex].ToString();
+        Random random = new Random();
+        int randomIndex = random.Next(0, searchRange.Length - 1);
+
+        return searchRange[randomIndex].ToString();
     }
 }

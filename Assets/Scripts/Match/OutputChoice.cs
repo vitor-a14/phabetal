@@ -19,12 +19,18 @@ public class OutputChoice : MonoBehaviour {
         //Instantiate new letters
         int count = 0;
         while(count < amount) {
+            //Get current letters
+            char[] currentLetters = new char[count];
+            for(int i = 0; i < currentLetters.Length; i++) {
+                currentLetters[i] = char.Parse(letters[i].GetComponentInChildren<TMP_Text>().text);
+            }
+
             //Instance
             GameObject letter = Instantiate(letterInstance, transform);
             letter.transform.SetParent(transform);
 
             //Set text
-            letter.GetComponentInChildren<TMP_Text>().text = AlphabetManager.GetRandomLetter();
+            letter.GetComponentInChildren<TMP_Text>().text = AlphabetManager.GetRandomLetter(currentLetters);
             letters.Add(letter);
 
             //Increase loop counter
