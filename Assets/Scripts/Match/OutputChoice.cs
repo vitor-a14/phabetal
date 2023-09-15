@@ -21,8 +21,11 @@ public class OutputChoice : MonoBehaviour {
         int count = 0;
         while(count < amount) {
             //Get current letters
-            char[] currentLetters = new char[count];
-            for(int i = 0; i < currentLetters.Length; i++) {
+            char[] currentLetters = new char[count+2];
+            currentLetters[count] = 'A';
+            currentLetters[count+1] = 'Z';
+
+            for(int i = 0; i < count; i++) {
                 currentLetters[i] = char.Parse(letters[i].GetComponentInChildren<TMP_Text>().text);
             }
 

@@ -18,6 +18,7 @@ public class MatchHandler : MonoBehaviour {
 
     [Header("Objects References")]
     public TMP_Text indicator;
+    public TMP_Text gameOverScore;
     public Camera mainCamera;
     public Animator panelAnimator;
     public Animator gameOverAnimator;
@@ -33,7 +34,7 @@ public class MatchHandler : MonoBehaviour {
 
     //if true, the player need to select a letter bigger than the output
     //if false the player need to select a letter smaller than the output
-    private bool isGreaterThan = true;
+    [HideInInspector] public bool isGreaterThan = true;
     private int currentTurn = 1;
     private bool gameOver = false;
 
@@ -138,6 +139,7 @@ public class MatchHandler : MonoBehaviour {
         }
 
         gameOver = true;
+        gameOverScore.text = score.currentScore.ToString();
         panelAnimator.transform.GetComponentInChildren<UnityEngine.UI.Image>().color = isGreaterThan ? greaterLettersColorMode : lowerLettersColorMode;
         panelAnimator.Play("FadeOut");
 

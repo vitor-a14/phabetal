@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ using UnityEngine;
 public class PlayerChoice : MonoBehaviour {
 
     public GameObject letterInstance;
+    public MatchHandler match;
     public OutputChoice output;
     public int choiceAmount;
     public List<GameObject> letters = new List<GameObject>();
@@ -18,35 +20,45 @@ public class PlayerChoice : MonoBehaviour {
     public void SetNewPlayerChoice() {
         ClearLetters();
 
-        //Instantiate new letters
+        // Instantiate new letters
         int count = 0;
-        while(count < choiceAmount) {
-            //Get current letters
+        System.Random random = new System.Random();
+        int choosenAnswerIndex = random.Next(0, choiceAmount);
 
-            char[] currentPlayerLetters = new char[count];
-            for(int i = 0; i < currentPlayerLetters.Length; i++) {
-                currentPlayerLetters[i] = char.Parse(letters[i].GetComponentInChildren<TMP_Text>().text);
-            }
+        while (count < choiceAmount) {
+            // Get current letters
+            char[] currentPlayerLetters = letters
+                .Select(letter => char.Parse(letter.GetComponentInChildren<TMP_Text>().text))
+                .ToArray();
 
-            char[] outputLetters = new char[output.letters.Count];
-            for(int i = 0; i < outputLetters.Length; i++) {
-                outputLetters[i] = char.Parse(output.letters[i].GetComponentInChildren<TMP_Text>().text);
-            }
+            char[] outputLetters = output.letters
+                .Select(letter => char.Parse(letter.GetComponentInChildren<TMP_Text>().text))
+                .ToArray();
 
-            char[] allCurrentLetters = new char[currentPlayerLetters.Length + outputLetters.Length];
-            Array.Copy(currentPlayerLetters, allCurrentLetters, currentPlayerLetters.Length);
-            Array.Copy(outputLetters, 0, allCurrentLetters, currentPlayerLetters.Length, outputLetters.Length);
+            char[] allCurrentLetters = currentPlayerLetters.Concat(outputLetters).ToArray();
 
-            //Instance
+            // Instantiate
             GameObject letter = Instantiate(letterInstance, transform);
             letter.transform.SetParent(transform);
 
-            //Set text
-            letter.GetComponentInChildren<TMP_Text>().text = AlphabetManager.GetRandomLetter(allCurrentLetters);
-            letters.Add(letter);
+            // Set text
+            bool correctAnswer = count == choosenAnswerIndex;
+            string choice = AlphabetManager.GetPlayerChoice(allCurrentLetters, outputLetters, correctAnswer, match.isGreaterThan);
+            
+            if (!string.IsNullOrEmpty(choice)) {
+                letter.GetComponentInChildren<TMP_Text>().text = choice;
 
-            //Increase loop counter
-            count++;
+                if (correctAnswer) {
+                    letter.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Bold;
+                }
+
+                letters.Add(letter);
+                count++;
+            } else {
+                // Handle the case where AlphabetManager.GetPlayerChoice returns an empty string.
+                // You can log an error or take appropriate action.
+                Debug.LogError("AlphabetManager.GetPlayerChoice returned an empty string.");
+            }
         }
     }
 
