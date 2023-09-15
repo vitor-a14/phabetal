@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using UnityEngine;
 
 // Handle the alphabet and letter order logic
 public class AlphabetManager {
@@ -11,7 +10,7 @@ public class AlphabetManager {
         int indexA = Array.IndexOf(alphabet, a);
         int indexB = Array.IndexOf(alphabet, b);
 
-        return a > b;
+        return indexA > indexB;
     }
 
     public static string GetOutputLetter(char[] avoidedLetters, bool isGreaterThan) {

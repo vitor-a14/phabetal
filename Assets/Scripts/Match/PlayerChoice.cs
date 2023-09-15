@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -48,9 +47,7 @@ public class PlayerChoice : MonoBehaviour {
             if (!string.IsNullOrEmpty(choice)) {
                 letter.GetComponentInChildren<TMP_Text>().text = choice;
 
-                if (correctAnswer) {
-                    letter.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Bold;
-                }
+                //if (correctAnswer) letter.GetComponentInChildren<TMP_Text>().fontStyle = FontStyles.Bold;
 
                 letters.Add(letter);
                 count++;
