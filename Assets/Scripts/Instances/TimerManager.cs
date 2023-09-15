@@ -21,6 +21,10 @@ public class TimerManager : MonoBehaviour
             currentDuration = Mathf.Clamp(currentDuration, 0, 9999);
             slider.value = currentDuration;
         }
+
+        if(currentDuration <= 0) {
+            timeIsOver = true;
+        }
     }
 
     public void SetTurnTimer(float duration) {

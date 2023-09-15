@@ -67,7 +67,7 @@ public class MatchHandler : MonoBehaviour {
             text.color = Color.Lerp(text.color, newColor, 5 * Time.deltaTime);
         }
 
-        if(timer.timeIsOver) {
+        if(timer.timeIsOver && !gameOver) {
             EndGame();
         }
     }
@@ -118,6 +118,7 @@ public class MatchHandler : MonoBehaviour {
 
     private IEnumerator EndGameCoroutine() {
         currentTurn = 1;
+        gameOver = true;
         Random random = new Random();
 
         foreach(GameObject letter in player.letters) {
@@ -138,7 +139,6 @@ public class MatchHandler : MonoBehaviour {
             rigid.AddTorque(25 * (randomForce * 0.1f) * (randomForce % 2 == 0 ? 1 : -1), ForceMode2D.Impulse);
         }
 
-        gameOver = true;
         gameOverScore.text = score.currentScore.ToString();
         panelAnimator.transform.GetComponentInChildren<UnityEngine.UI.Image>().color = isGreaterThan ? greaterLettersColorMode : lowerLettersColorMode;
         panelAnimator.Play("FadeOut");
