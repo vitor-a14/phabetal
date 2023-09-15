@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using UnityEngine;
 
 // Handle the alphabet and letter order logic
 public class AlphabetManager {
@@ -15,10 +14,10 @@ public class AlphabetManager {
         return a > b;
     }
 
-    public static string GetRandomLetter(char[] avoidedLetters) {
+    public static string GetOutputLetter(char[] avoidedLetters, bool isGreaterThan) {
         char[] searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter)).ToArray();
 
-        Random random = new Random();
+        System.Random random = new System.Random();
         int randomIndex = random.Next(0, searchRange.Length - 1);
 
         return searchRange[randomIndex].ToString();
@@ -37,11 +36,20 @@ public class AlphabetManager {
                 searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter) && Array.IndexOf(alphabet, letter) < outputIndex).ToArray();
             }
         } else {
-            searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter)).ToArray();
+            if(isGreaterThan) {
+                outputIndex = FindIndexInAlphabet(outputLetters, false);
+                searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter) && Array.IndexOf(alphabet, letter) < outputIndex).ToArray();
+            } else {
+                outputIndex = FindIndexInAlphabet(outputLetters, true);
+                searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter) && Array.IndexOf(alphabet, letter) > outputIndex).ToArray();
+            }
+
+            if(searchRange.Length <= 0)
+                searchRange = alphabet.Where(letter => !avoidedLetters.Contains(letter)).ToArray();
         }
 
-        Random random = new Random();
-        int randomIndex = random.Next(0, searchRange.Length);
+        System.Random random = new System.Random();
+        int randomIndex = random.Next(0, searchRange.Length - 1);
 
         return searchRange[randomIndex].ToString();
     }

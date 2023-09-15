@@ -1252,6 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   letterInstance: {fileID: 8344511175963302636, guid: 32ba21f543e50824d9144db851044251, type: 3}
+  match: {fileID: 1541457308}
   amount: 1
   letters: []
 --- !u!224 &870020055 stripped
@@ -1869,22 +1870,28 @@ MonoBehaviour:
   - turnTrigger: 1
     turnDuration: 20
     playerChoiceAmount: 2
-  - turnTrigger: 5
+  - turnTrigger: 6
     turnDuration: 20
     playerChoiceAmount: 3
-  - turnTrigger: 10
+  - turnTrigger: 16
     turnDuration: 15
     playerChoiceAmount: 3
-  - turnTrigger: 15
-    turnDuration: 12
+  - turnTrigger: 26
+    turnDuration: 15
     playerChoiceAmount: 4
-  - turnTrigger: 20
-    turnDuration: 10
-    playerChoiceAmount: 4
-  - turnTrigger: 20
+  - turnTrigger: 36
+    turnDuration: 20
+    playerChoiceAmount: 8
+  - turnTrigger: 46
+    turnDuration: 16
+    playerChoiceAmount: 8
+  - turnTrigger: 61
     turnDuration: 10
     playerChoiceAmount: 8
-  - turnTrigger: 30
+  - turnTrigger: 71
+    turnDuration: 15
+    playerChoiceAmount: 12
+  - turnTrigger: 101
     turnDuration: 10
     playerChoiceAmount: 12
   isGreaterThan: 1

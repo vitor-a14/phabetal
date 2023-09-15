@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class OutputChoice : MonoBehaviour {
 
     public GameObject letterInstance;
+    public MatchHandler match;
     public int amount;
     public List<GameObject> letters = new List<GameObject>();
 
@@ -35,7 +36,7 @@ public class OutputChoice : MonoBehaviour {
             letter.transform.SetParent(transform);
 
             //Set text
-            letter.GetComponentInChildren<TMP_Text>().text = AlphabetManager.GetRandomLetter(currentLetters);
+            letter.GetComponentInChildren<TMP_Text>().text = AlphabetManager.GetOutputLetter(currentLetters, match.isGreaterThan);
             letters.Add(letter);
 
             //Increase loop counter
