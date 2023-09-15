@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Renders and process what output the player will receive
 public class OutputChoice : MonoBehaviour {
@@ -27,6 +28,7 @@ public class OutputChoice : MonoBehaviour {
 
             //Instance
             GameObject letter = Instantiate(letterInstance, transform);
+            letter.GetComponent<Button>().interactable = false;
             letter.transform.SetParent(transform);
 
             //Set text
