@@ -111,6 +111,7 @@ public class MatchHandler : MonoBehaviour {
     }
 
     private void EndGame() {
+        PlayerPrefs.SetInt("Score", score.currentScore);
         StartCoroutine(EndGameCoroutine());
     }
 
@@ -158,6 +159,18 @@ public class MatchHandler : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(0);
+    }
+
+    public void TryAgain() {
+        StartCoroutine(TryAgainCoroutine());
+    }
+
+    private IEnumerator TryAgainCoroutine() {
+        gameOverAnimator.Play("FadeOut");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(1);
     }
 
     private void SetDifficulty() {
